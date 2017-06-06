@@ -2,28 +2,42 @@ import Config from '../../../config'
 import Vue from 'vue'
 
 export default class HttpService {
+
     get(url) {
-        return Vue.http.get(Config.apiUrl + url).then((results) => {
-            return this._stripRestrictedValues(results.body);
+        return this._doAjaxRequest(Config.apiUrl + url, 'GET').then((results) => {
+            return this._stripRestrictedValues(results);
         });
     }
 
     getById(url, id) {
-        return Vue.http.get(Config.apiUrl + url + '/' + id).then((response) => {
-            return response.body;
+        return this._doAjaxRequest(Config.apiUrl + url + '/' + id, 'GET').then((response) => {
+            return response;
         });
     }
 
     post(url, data) {
-        return Vue.http.post(Config.apiUrl + url, data);
+        return this._doAjaxRequest(Config.apiUrl + url, 'POST', data);
     }
 
     put(url, data) {
-        return Vue.http.put(Config.apiUrl + url, data);
+        this._doAjaxRequest(Config.apiUrl + url, 'PUT', data);
     }
 
     del(url) {
-        return Vue.http.delete(Config.apiUrl + url);
+        return this._doAjaxRequest(Config.apiUrl + url, 'DELETE');
+    }
+
+    _doAjaxRequest(url, method, data){
+        return $.ajax({
+            url: url,
+            cache : false,
+            data : data,
+            method : method,
+            // send cross domain cookies, for da lulz
+            xhrFields: {
+                withCredentials: true
+            }
+        });
     }
 
     _stripRestrictedValues(items) {

@@ -1,23 +1,20 @@
 import HttpService from './httpService'
 
-class HttpMedicalFileService {
+export default class HttpMedicalFileService {
 
     constructor () {
         this.httpService = new HttpService();
-        this.url = 'OrganisationType'
     }
 
-    getMedicalFile(bsn) {
-        return this.httpService.get("MedicalFile?filter={\"owner\":\"" + bsn + "\"}");
+    getMedicalFile() {
+        return this.httpService.get("MedicalFile").then((files) => {
+            return files.length > 0 ? files[0] : null;
+        });
     }
 
-    saveMedicalFile(medicalFile) {
-        let id = medicalFile.id;
-
-        delete medicalFile.id;
-
-        return this.httpService.put("MedicalFile/" + id, medicalFile);
+    getMedicalFileByBsn(bsn) {
+        return this.httpService.getById("MedicalFile", bsn).then((file) => {
+            return file;
+        });
     }
 }
-
-export default new HttpMedicalFileService();

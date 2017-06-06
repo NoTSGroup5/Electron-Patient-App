@@ -24,9 +24,6 @@
                 return this.$router.push({name: 'settings'})
             }
 
-            // overwrite
-            account.secret = 'JCwQEbmycBow';
-
             // we are already authenticated with facebook
             if(window.location.href.includes("done=true")) {
                 let walletId = null;
@@ -40,10 +37,8 @@
                     });
                 }).then((identity) => {
                     return doAjaxRequest(`http://localhost:3000/api/wallets/${walletId}/identities/${identity.id}/setDefault`, 'POST');
-                }).then(() => {
-                    return doAjaxRequest('http://localhost:3000/api/MedicalFile', 'GET');
                 }).then((files) => {
-                    console.log(files);
+                    console.log('Done!');
                 }).catch(() => {
                     console.log('Iets is goed kapot!');
                 });

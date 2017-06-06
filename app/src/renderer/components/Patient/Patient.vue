@@ -2,124 +2,105 @@
     <div>
         <div class="row">
             <div class="col-xs-6 form-group">
-
-                <form @submit.prevent="validateForm()">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('first_name') }">
-                                <label for="patientscreate-first_name" class="control-label required">Naam </label>
-                                <input v-model="model.firstName" name="first_name" v-validate="'required'" class="form-control" id="patientscreate-first_name">
-                                <p class="text-danger" v-show="errors.has('first_name')">Een voornaam is verplicht.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('name_prefix') }">
-                                <label for="name_prefix" class="control-label">Tussenvoegsel</label>
-                                <input v-model="model.namePrefix" name="name_prefix" class="form-control" id="name_prefix">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('last_name') }">
-                                <label for="name_prefix" class="control-label required">Achternaam</label>
-                                <input v-model="model.lastName" name="last_name" v-validate="'required'" class="form-control" id="last_name">
-                                <p class="text-danger" v-show="errors.has('last_name')">Een achternaam is verplicht.</p>
-                            </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="patientscreate-first_name" class="control-label required">Naam </label>
+                            <input disabled="disabled" v-model="model.firstName" name="first_name" class="form-control" id="patientscreate-first_name">
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('birthday_day') }">
-                                <label for="patientscreate-birthday-day" class="control-label required">Dag</label>
-                                <select v-model="model.birthday.day" id="patientscreate-birthday-day" name="birthday_day" class="form-control">
-                                    <option hidden value="" selected>Kies een dag</option>
-                                    <option v-for="day in getDays()" :value="day">{{day}}</option>
-                                </select>
-                                <p class="text-danger" v-show="errors.has('birthday_day')">Een dag is verplicht.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('birthday_month') }">
-                                <label for="patientscreate-birthday_month" class="control-label required">Maand</label>
-                                <select v-model="model.birthday.month" id="patientscreate-birthday_month" name="birthday_month" class="form-control">
-                                    <option hidden value="" selected>Kies een maand</option>
-                                    <option v-for="month in getMonths()" :value="month.id">{{month.name}}</option>
-                                </select>
-                                <p class="text-danger" v-show="errors.has('birthday_month')">Een maand is verplicht.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" :class="{'has-error': errors.has('birthday_year') }">
-                                <label for="patientscreate-birthday_year" class="control-label required">Jaar</label>
-                                <select v-model="model.birthday.year" id="patientscreate-birthday_year" name="birthday_year" class="form-control">
-                                    <option hidden value="" selected>Kies een jaar</option>
-                                    <option v-for="year in getYears()" :value="year">{{year}}</option>
-                                </select>
-                                <p class="text-danger" v-show="errors.has('birthday_year')">Een jaar is verplicht.</p>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name_prefix" class="control-label">Tussenvoegsel</label>
+                            <input disabled="disabled" v-model="model.namePrefix" name="name_prefix" class="form-control" id="name_prefix">
                         </div>
                     </div>
-
-                    <div class="form-group" :class="{'has-error': errors.has('gender') }">
-                        <label for="patientscreate-gender" class="control-label required">Geslacht</label>
-                        <select v-model="model.gender" name="gender" v-validate="'required'" id="patientscreate-gender" class="form-control">
-                            <option hidden value="" selected>Kies een geslacht</option>
-                            <option v-for="gender in getGenders()" :value="gender">{{gender}}</option>
-                        </select>
-                        <p class="text-danger" v-show="errors.has('gender')">Een geslacht is verplicht.</p>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group" :class="{'has-error': errors.has('street') }">
-                                <label for="patientcreate-street" class="control-label required">Straatnaam</label>
-                                <input v-model="model.streetName" name="street" v-validate="'required'" class="form-control" id="patientcreate-street">
-                                <p class="text-danger" v-show="errors.has('street')">Een straatnaam is verplicht.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group" :class="{'has-error': errors.has('street_number') }">
-                                <label for="patientcreate-street_number" class="control-label required">Huisnummer</label>
-                                <input v-model="model.streetNumber" v-validate="'required'" name="street_number" class="form-control" id="patientcreate-street_number">
-                                <p class="text-danger" v-show="errors.has('street_number')">Een huisnummer is verplicht.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group" :class="{'has-error': errors.has('street_number_extra') }">
-                                <label for="patientcreate-street_number_extra" class="control-label">Toevoeging</label>
-                                <input v-model="model.streetNumberExtra" name="street_number_extra" class="form-control" id="patientcreate-street_number_extra">
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name_prefix" class="control-label required">Achternaam</label>
+                            <input disabled="disabled" v-model="model.lastName" name="last_name" class="form-control" id="last_name">
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group" :class="{'has-error': errors.has('zip_code') }">
-                        <label for="patientcreate-zip_code" class="control-label required">Postcode</label>
-                        <input v-model="model.zipCode" v-validate="'required'" name="zip_code" class="form-control" id="patientcreate-zip_code">
-                        <p class="text-danger" v-show="errors.has('zip_code')">Een postcode is verplicht.</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="patientscreate-birthday-day" class="control-label required">Dag</label>
+                            <select disabled="disabled" v-model="model.birthday.day" id="patientscreate-birthday-day" name="birthday_day" class="form-control">
+                                <option hidden value="" selected>Kies een dag</option>
+                                <option v-for="day in getDays()" :value="day">{{day}}</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="form-group" :class="{'has-error': errors.has('residence') }">
-                        <label for="patientcreate-residence" class="control-label required">Woonplaats</label>
-                        <input v-model="model.residence" v-validate="'required'" name="residence" class="form-control" id="patientcreate-residence">
-                        <p class="text-danger" v-show="errors.has('residence')">Een woonplaats is verplicht.</p>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="patientscreate-birthday_month" class="control-label required">Maand</label>
+                            <select disabled="disabled" v-model="model.birthday.month" id="patientscreate-birthday_month" name="birthday_month" class="form-control">
+                                <option hidden value="" selected>Kies een maand</option>
+                                <option v-for="month in getMonths()" :value="month.id">{{month.name}}</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="form-group" :class="{'has-error': errors.has('telephone_number') }">
-                        <label for="patientcreate-telephone_number" class="control-label required">Telefoonnummer</label>
-                        <input v-model="model.telephoneNumber" v-validate="'required'" name="telephone_number" class="form-control" id="patientcreate-telephone_number">
-                        <p class="text-danger" v-show="errors.has('telephone_number')">Een telefoonnummer is verplicht.</p>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="patientscreate-birthday_year" class="control-label required">Jaar</label>
+                            <select disabled="disabled" v-model="model.birthday.year" id="patientscreate-birthday_year" name="birthday_year" class="form-control">
+                                <option hidden value="" selected>Kies een jaar</option>
+                                <option v-for="year in getYears()" :value="year">{{year}}</option>
+                            </select>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="form-group" :class="{'has-error': errors.has('email') }">
-                        <label for="patientcreate-email" class="control-label required">Email</label>
-                        <input v-model="model.email" v-validate="'required'" name="email" class="form-control" id="patientcreate-email">
-                        <p class="text-danger" v-show="errors.has('email')">Een email is verplicht.</p>
+                <div class="form-group" :class="{'has-error': errors.has('gender') }">
+                    <label for="patientscreate-gender" class="control-label required">Geslacht</label>
+                    <select disabled="disabled" v-model="model.gender" name="gender" id="patientscreate-gender" class="form-control">
+                        <option hidden value="" selected>Kies een geslacht</option>
+                        <option v-for="gender in getGenders()" :value="gender">{{gender}}</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="patientcreate-street" class="control-label required">Straatnaam</label>
+                            <input disabled="disabled" v-model="model.streetName" name="street" class="form-control" id="patientcreate-street">
+                        </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="patientcreate-street_number" class="control-label required">Huisnummer</label>
+                            <input disabled="disabled" v-model="model.streetNumber" name="street_number" class="form-control" id="patientcreate-street_number">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="patientcreate-street_number_extra" class="control-label">Toevoeging</label>
+                            <input disabled="disabled" v-model="model.streetNumberExtra" name="street_number_extra" class="form-control" id="patientcreate-street_number_extra">
+                        </div>
+                    </div>
+                </div>
 
-                    <button type="submit" class="btn btn-default">Gegevens opslaan</button>
+                <div class="form-group">
+                    <label for="patientcreate-zip_code" class="control-label required">Postcode</label>
+                    <input disabled="disabled" v-model="model.zipCode" name="zip_code" class="form-control" id="patientcreate-zip_code">
+                </div>
 
-                </form>
+                <div class="form-group">
+                    <label for="patientcreate-residence" class="control-label required">Woonplaats</label>
+                    <input disabled="disabled" v-model="model.residence" name="residence" class="form-control" id="patientcreate-residence">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientcreate-telephone_number" class="control-label required">Telefoonnummer</label>
+                    <input disabled="disabled" v-model="model.telephoneNumber" name="telephone_number" class="form-control" id="patientcreate-telephone_number">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientcreate-email" class="control-label required">Email</label>
+                    <input disabled="disabled" v-model="model.email" name="email" class="form-control" id="patientcreate-email">
+                </div>
             </div>
 
             <div class="col-xs-6 form-group">
@@ -127,16 +108,16 @@
                 <div>
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>BSN</th>
-                                <th>Naam</th>
-                                <th>
-                                    <span class="glyphicon glyphicon-plus pull-right" type="button" data-toggle="modal" data-target="#addMentorModal"></span>
-                                </th>
-                            </tr>
+                        <tr>
+                            <th>BSN</th>
+                            <th>Naam</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <!-- TODO: Implement this -->
+                        <tr v-for="person in model.mentors">
+                            <td>{{person.bsn}}</td>
+                            <td>{{getFullName(person)}}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -144,23 +125,19 @@
                 <label>Organisaties</label>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>Naam organisatie</th>
-                            <th>Locatie</th>
-                            <th>
-                                <span class="glyphicon glyphicon-plus pull-right" type="button" data-toggle="modal" data-target="#organisatietoevoegen"> </span>
-                            </th>
-                        </tr>
+                    <tr>
+                        <th>Naam organisatie</th>
+                        <th>Locatie</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <!-- TODO: Implement this -->
+                    <tr v-for="organisation in model.organisations">
+                        <td>{{organisation.name}}</td>
+                        <td>{{getOrganisationLocation(organisation)}}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div id="addMentorModal" class="modal fade" role="dialog">
-            <MentorToevoegenModal></MentorToevoegenModal>
         </div>
     </div>
 </template>
@@ -174,8 +151,12 @@
     import BootstrapModal from '../Shared/Bootstrap/BootstrapModal'
 
     import HttpPatientsService from '../../../services/httpPatientsService'
+    import HttpMedicalFileService from '../../../services/httpMedicalFileService'
+    import HttpOrganisationService from '../../../services/httpOrganisationService'
 
-    let httpPatientsService = new HttpPatientsService();
+    let httpPatientService = new HttpPatientsService();
+    let httpMedicalService = new HttpMedicalFileService();
+    let httpOrganisationService = new HttpOrganisationService();
 
     export default {
         components: {
@@ -187,7 +168,6 @@
 
         data ()  {
             return {
-                patient: {},
                 model: {
                     bsn: "",
                     gender: "",
@@ -205,49 +185,93 @@
                         day: "",
                         month: "",
                         year: ""
-                    }
+                    },
+                    mentors : [],
+                    organisations : []
                 }
             }
         },
 
         created: function () {
-            let bsn = this.$route.params.bsn;
+            let account = JSON.parse(localStorage.getItem("account"));
+            account.bsn = "000000";
 
-            httpPatientsService.getPatientbyBsn(bsn).then(response => {
-                this.patient = response;
+            this.loadPatient(account);
 
-                let birthday = new Date(response.birthday);
-
-                this.model.bsn = response.bsn;
-                this.model.gender = response.gender;
-                this.model.firstName = response.firstName;
-                this.model.namePrefix = response.namePrefix;
-                this.model.lastName = response.lastName;
-                this.model.streetName = response.street;
-                this.model.streetNumber = response.houseNumber;
-                this.model.birthday = { day: birthday.getDate(), month: birthday.getMonth(), year: birthday.getFullYear() },
-                this.model.streetNumberExtra = response.houseNumberExtra;
-                this.model.zipCode = response.zipCode;
-                this.model.residence = response.city;
-                this.model.telephoneNumber = response.telephoneNumber;
-                this.model.email = response.email;
-            }).catch(e => {
-                console.log(e);
-            });
+            this.getMedicalFile(account).then((medicalFile) => {
+                return Promise.all([this.loadMentors(medicalFile), this.loadOrganisations(medicalFile)]);
+            }).catch(console.error);
         },
-
         methods: {
-            validateForm(){
-                this.$validator.validateAll().then(() => {
-                    let birthdayTimestamp = this.getTimeStamp(this.model.birthday.day, this.model.birthday.month, this.model.birthday.year);
-                    httpPatientsService.editPatient(this.model.bsn, this.model.firstName, this.model.namePrefix, this.model.lastName, this.model.gender, birthdayTimestamp, this.model.streetName, this.model.streetNumber, this.model.streetNumberExtra, this.model.zipCode, this.model.residence, this.model.telephoneNumber, this.model.email).then(() => {
-                        this.$router.push({ name: "patientsOverview" })
-                    }).catch(() => {
-                        alert('An error occurred while editing the patient')
-                    })
-                }).catch((err) => {
-                    console.log(err)
+            getOrganisationLocation(organisation){
+                let address = organisation.street + ' ' + organisation.houseNumber;
+
+                if(organisation.houseNumberExtra){
+                    address += ' ' + organisation.houseNumberExtra;
+                }
+
+                address += ', ' + organisation.zipCode + ' ' + organisation.city;
+
+                return address;
+            },
+            loadPatient(account){
+                httpPatientService.getPatientbyBsn(account.bsn).then((response) => {
+                    let birthday = new Date(response.birthday);
+                    this.model.bsn = response.bsn;
+                    this.model.gender = response.gender;
+                    this.model.firstName = response.firstName;
+                    this.model.namePrefix = response.namePrefix;
+                    this.model.lastName = response.lastName;
+                    this.model.streetName = response.street;
+                    this.model.streetNumber = response.houseNumber;
+                    this.model.birthday = {
+                        day: birthday.getDate(),
+                        month: birthday.getMonth(),
+                        year: birthday.getFullYear()
+                    };
+                    this.model.streetNumberExtra = response.houseNumberExtra;
+                    this.model.zipCode = response.zipCode;
+                    this.model.residence = response.city;
+                    this.model.telephoneNumber = response.telephoneNumber;
+                    this.model.email = response.email;
                 });
+            },
+            loadMentors(medicalFile) {
+                return Promise.all(this.getPersons(medicalFile.mentors)).then((mentors) => {
+                    this.model.mentors = mentors;
+                }).catch((err) => {
+                    console.log(err);
+                });
+            },
+            loadOrganisations(medicalFile){
+                return Promise.all(medicalFile.permissions.map((permission) => {
+                    return httpOrganisationService.getById(this.getIdFromResource(permission.organisation)).then((organisations) => {
+                        this.model.organisations = organisations;
+                    });
+                }));
+            },
+            getMedicalFile(account){
+                return httpMedicalService.getMedicalFileByBsn(account.bsn)
+            },
+            getPersons(persons){
+                return persons.map((personReference) => {
+                    return httpPatientService.getPatientbyBsn(this.getIdFromResource(personReference));
+                });
+            },
+            getIdFromResource(resourceReference){
+                let bsnIndex = resourceReference.indexOf("#");
+                return resourceReference.substr(bsnIndex + 1, resourceReference.length - bsnIndex + 1);
+            },
+            getFullName(person){
+                let name = person.firstName;
+
+                if(person.namePrefix){
+                    name += " " + person.namePrefix;
+                }
+
+                name += " " + person.lastName;
+
+                return name;
             },
             getGenders(){
                 return ['Man', 'Vrouw', 'Apache Helicopter']

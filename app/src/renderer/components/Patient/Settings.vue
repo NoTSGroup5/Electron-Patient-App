@@ -31,6 +31,14 @@
                 }
             }
         },
+        created : function () {
+          let account = localStorage.getItem("account") != null ? JSON.parse(localStorage.getItem("account")) : null;
+
+          if(account){
+              this.model.bsn = account.bsn;
+              this.model.secret = account.secret;
+          }
+        },
         methods: {
             validateForm () {
                 this.$validator.validateAll().then(() => {

@@ -2,8 +2,9 @@
     <div id="app">
         <Navbar title="EPD">
             <NavbarLink to="/" :active="$route.path === '/'">Home</NavbarLink>
-            <NavbarLink to="/patient/dossier">Mijn dossier</NavbarLink>
-            <NavbarLink to="/patient/contact">Contact gegevens</NavbarLink>
+            <NavbarLink to="/patient/dossier" :active="$route.path === '/patient/dossier'">Mijn dossier</NavbarLink>
+            <NavbarLink to="/patient" :active="$route.path === '/patient'">Contact gegevens</NavbarLink>
+            <NavbarLink to="/settings" :active="$route.path === '/settings'">Instellingen</NavbarLink>
         </Navbar>
 
         <div class="container">
