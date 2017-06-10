@@ -52,7 +52,7 @@
                 </div>
 
                 <div>
-                    <h4>Behandelingen  </h4>
+                    <h4>Behandelingen</h4>
 
                     <table class="table table-striped">
                         <thead>

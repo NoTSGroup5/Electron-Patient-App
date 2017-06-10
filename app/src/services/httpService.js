@@ -11,7 +11,7 @@ export default class HttpService {
 
     getById(url, id) {
         return this._doAjaxRequest(Config.apiUrl + url + '/' + id, 'GET').then((response) => {
-            return response;
+            return this._stripRestrictedValues(response);
         });
     }
 
@@ -31,7 +31,8 @@ export default class HttpService {
         return $.ajax({
             url: url,
             cache : false,
-            data : data,
+            data: JSON.stringify(data),
+            contentType: "application/json",
             method : method,
             // send cross domain cookies, for da lulz
             xhrFields: {
@@ -41,9 +42,15 @@ export default class HttpService {
     }
 
     _stripRestrictedValues(items) {
-        items.forEach(item => {
-            this.restrictedFields.forEach(field => delete item[field])
-        });
+        if(Array.isArray(items)){
+            items.forEach(item => {
+                this.restrictedFields.forEach(field => delete item[field])
+            });
+
+            return items;
+        }
+
+        this.restrictedFields.forEach(field => delete items[field]);
 
         return items;
     }

@@ -42,11 +42,9 @@
 </template>
 
 <script>
-
- import HttpPatientsService from '../../../../../services/httpPatientsService'
+import HttpPatientsService from '../../../../../services/httpPatientsService'
 
 let httpPatientsService = new HttpPatientsService();
-
 
 export default {
   components: {
@@ -61,7 +59,6 @@ export default {
         }
     }
   },
-
     methods: {
         findMentor(){
             httpPatientsService.getPatientbyBsn(this.bsn).then(response => {

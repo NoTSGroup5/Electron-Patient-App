@@ -2,8 +2,6 @@
   <div>
     <h1>Nationaal EPD systeem</h1>
     <p>Zie uw dossier in.</p>
-
-    <a href="http://localhost:3000/auth/github" target="_blank" class="btn btn-default">Login</a>
   </div>
 </template>
 

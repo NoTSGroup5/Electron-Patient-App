@@ -24,24 +24,6 @@
         components: {
             Navbar,
             NavbarLink
-        },
-
-        methods: {
-            isOrganisationPageActive() {
-                let pages = ['organisationsView', 'organisationCreate', 'organisationEdit'];
-
-                return pages.indexOf(this.$route.name) > -1;
-            },
-            isOrganisationTypePageActive(){
-                let pages = ['organisationTypesView', 'organisationTypeCreate'];
-
-                return pages.indexOf(this.$route.name) > -1;
-            },
-            isPatientsPageActive(){
-                let pages = ['patientsOverview', 'patientsCreate', 'patientInfo', 'patientDossier'];
-
-                return pages.indexOf(this.$route.name) > -1;
-            }
         }
     }
 </script>

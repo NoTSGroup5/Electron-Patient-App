@@ -17,4 +17,8 @@ export default class HttpMedicalFileService {
             return file;
         });
     }
+
+    saveMedicalFile(bsn, medicalFile) {
+        return this.httpService.put("MedicalFile/" + bsn, medicalFile);
+    }
 }

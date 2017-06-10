@@ -15,4 +15,10 @@ export default class HttpPatientsService {
     getPatientbyBsn(bsn) {
         return this.httpService.getById('Patient', bsn);
     }
+
+    updatePatient(bsn, model) {
+        delete model.bsn;
+
+        return this.httpService.put('Patient/' + bsn, model);
+    }
 }
