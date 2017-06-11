@@ -388,9 +388,11 @@
                 this.$validator.validateAll().then(() => {
                     delete this.medicalFile.bsn;
 
+                    let patient = Object.assign({}, this.model, {birthday : this.getTimeStamp(this.model.birthday.day, this.model.birthday.month, this.model.birthday.year)})
+
                     Promise.all([
                         httpMedicalService.saveMedicalFile(this.model.bsn, this.medicalFile),
-                        httpPatientService.updatePatient(this.model.bsn, this.model)
+                        httpPatientService.updatePatient(this.model.bsn, patient)
                     ]).catch(() => {
                         alert('An error occurred while updating the patient.')
                     });

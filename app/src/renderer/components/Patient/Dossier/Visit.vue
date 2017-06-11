@@ -1,27 +1,17 @@
 <template>
-  <tr>
-   <p>WE STILL NEED TO CHANGE THIS!</p>
-  </tr>
+    <tr>
+        <td>{{visit.organisation.name}}</td>
+        <td>{{visit.date | formatDate }} </td>
+        <td>{{visit.description}}</td>
+    </tr>
 </template>
 
 <script>
-  export default {
-    props: [
-      'bsn',
-      'firstName',
-      'namePrefix',
-      'lastName',
-      'email',
-      'telephoneNumber',
-      'birthday',
-      'gender',
-      'city',
-      'zipCode',
-      'street',
-      'houseNumber',
-      'houseNumberExtra'
-    ]
-  }
+    export default {
+        props: [
+            'visit'
+        ]
+    }
 </script>
 
 <style scoped>

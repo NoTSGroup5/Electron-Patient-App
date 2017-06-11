@@ -1,13 +1,15 @@
 <template>
     <tr>
-        <td>{{ allergy }}</td>
+        <td>{{ organisatie.name }}</td>
+        <td>{{ organisatie.city }}</td>
     </tr>
 </template>
 
 <script>
+   
     export default {
         props: [
-            "allergy"
+            "organisatie"
         ]
     }
 </script>

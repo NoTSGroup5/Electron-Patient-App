@@ -1,13 +1,15 @@
 <template>
     <tr>
-        <td>{{ allergy }}</td>
+        <td>{{ mentor.bsn }}</td>
+        <td>{{ mentor.firstName }}</td>
     </tr>
 </template>
 
 <script>
+   
     export default {
         props: [
-            "allergy"
+            "mentor"
         ]
     }
 </script>
