@@ -15,13 +15,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name_prefix" class="control-label">Tussenvoegsel</label>
-                                <input  v-model="model.namePrefix" name="name_prefix" class="form-control" id="name_prefix">
+                                <input v-model="model.namePrefix" name="name_prefix" class="form-control" id="name_prefix">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name_prefix" class="control-label required">Achternaam</label>
-                                <input  v-model="model.lastName" name="last_name" class="form-control" id="last_name">
+                                <input v-model="model.lastName" name="last_name" class="form-control" id="last_name">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="patientscreate-birthday-day" class="control-label required">Dag</label>
-                                <select  v-model="model.birthday.day" id="patientscreate-birthday-day" name="birthday_day" class="form-control">
+                                <select v-model="model.birthday.day" id="patientscreate-birthday-day" name="birthday_day" class="form-control">
                                     <option hidden value="" selected>Kies een dag</option>
                                     <option v-for="day in getDays()" :value="day">{{day}}</option>
                                 </select>
@@ -39,7 +39,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="patientscreate-birthday_month" class="control-label required">Maand</label>
-                                <select  v-model="model.birthday.month" id="patientscreate-birthday_month" name="birthday_month" class="form-control">
+                                <select v-model="model.birthday.month" id="patientscreate-birthday_month" name="birthday_month" class="form-control">
                                     <option hidden value="" selected>Kies een maand</option>
                                     <option v-for="month in getMonths()" :value="month.id">{{month.name}}</option>
                                 </select>
@@ -48,7 +48,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="patientscreate-birthday_year" class="control-label required">Jaar</label>
-                                <select  v-model="model.birthday.year" id="patientscreate-birthday_year" name="birthday_year" class="form-control">
+                                <select v-model="model.birthday.year" id="patientscreate-birthday_year" name="birthday_year" class="form-control">
                                     <option hidden value="" selected>Kies een jaar</option>
                                     <option v-for="year in getYears()" :value="year">{{year}}</option>
                                 </select>
@@ -58,7 +58,7 @@
 
                     <div class="form-group" :class="{'has-error': errors.has('gender') }">
                         <label for="patientscreate-gender" class="control-label required">Geslacht</label>
-                        <select  v-model="model.gender" name="gender" id="patientscreate-gender" class="form-control">
+                        <select v-model="model.gender" name="gender" id="patientscreate-gender" class="form-control">
                             <option hidden value="" selected>Kies een geslacht</option>
                             <option v-for="gender in getGenders()" :value="gender">{{gender}}</option>
                         </select>
@@ -68,13 +68,13 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="patientcreate-street" class="control-label required">Straatnaam</label>
-                                <input  v-model="model.street" name="street" class="form-control" id="patientcreate-street">
+                                <input v-model="model.street" name="street" class="form-control" id="patientcreate-street">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="patientcreate-street_number" class="control-label required">Huisnummer</label>
-                                <input  v-model="model.houseNumber" name="street_number" class="form-control" id="patientcreate-street_number">
+                                <input v-model="model.houseNumber" name="street_number" class="form-control" id="patientcreate-street_number">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -87,22 +87,22 @@
 
                     <div class="form-group">
                         <label for="patientcreate-zip_code" class="control-label required">Postcode</label>
-                        <input  v-model="model.zipCode" name="zip_code" class="form-control" id="patientcreate-zip_code">
+                        <input v-model="model.zipCode" name="zip_code" class="form-control" id="patientcreate-zip_code">
                     </div>
 
                     <div class="form-group">
                         <label for="patientcreate-residence" class="control-label required">Woonplaats</label>
-                        <input  v-model="model.city" name="residence" class="form-control" id="patientcreate-residence">
+                        <input v-model="model.city" name="residence" class="form-control" id="patientcreate-residence">
                     </div>
 
                     <div class="form-group">
                         <label for="patientcreate-telephone_number" class="control-label required">Telefoonnummer</label>
-                        <input  v-model="model.telephoneNumber" name="telephone_number" class="form-control" id="patientcreate-telephone_number">
+                        <input v-model="model.telephoneNumber" name="telephone_number" class="form-control" id="patientcreate-telephone_number">
                     </div>
 
                     <div class="form-group">
                         <label for="patientcreate-email" class="control-label required">Email</label>
-                        <input  v-model="model.email" name="email" class="form-control" id="patientcreate-email">
+                        <input v-model="model.email" name="email" class="form-control" id="patientcreate-email">
                     </div>
 
                     <button type="submit" class="btn btn-default">Gegevens opslaan</button>
@@ -540,7 +540,7 @@
                 ]
             },
             getTimeStamp(day, month, year){
-                return new Date(year, month, day, 0, 0, 0, 0);
+                return new Date(year, month, day, 0, 0, 0, 0).getTime();
             }
         }
     }
