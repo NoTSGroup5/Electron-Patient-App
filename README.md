@@ -33,7 +33,7 @@ export COMPOSER_PROVIDERS='{
 npm run restAuthentication
 ```
 
-4. Run the appication
+4. Run the application
 ```
 npm run dev
 ```
